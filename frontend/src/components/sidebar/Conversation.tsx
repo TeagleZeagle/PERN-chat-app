@@ -1,11 +1,14 @@
 import useConversation from "../../zustand/useConversation.ts";
+import {useSocketContext} from "../../context/SocketContext.tsx";
 
 const Conversation = ({conversation, emoji}: { conversation: ConversationType, emoji: string }) => {
 
     const {setSelectedConversation, selectedConversation} = useConversation();
     const isSelected = selectedConversation?.id === conversation?.id;
 
-    const isOnline = false
+    const {onlineUsers} = useSocketContext();
+
+    const isOnline = onlineUsers.includes(conversation.id)
 
     return (
         <>
